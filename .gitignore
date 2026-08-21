@@ -60,3 +60,6 @@ dkms.conf
 #model 
 *.pth
 *.pt
+# fashion data from internet
+*.ubyte
+*.ubyte.gz
