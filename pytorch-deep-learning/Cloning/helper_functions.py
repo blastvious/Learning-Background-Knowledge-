@@ -292,3 +292,37 @@ def download_data(source: str,
             os.remove(data_path / target_file)
     
     return image_path
+
+
+class ImageFolderCustom(Dataset):
+    def __init__(self, target_dir: str,transform=None):
+        # Get all img path
+        self.paths= list(pathlib.Path(target_dir).glob("*/*.jpg"))
+        # Sst up transform
+        self.transform = transform
+
+        #Create attribute tu save classes, class_to_idx
+        self.classes, self.class_to_idx = find_classes(target_dir)
+    def load_image(self, index: int) -> Image.Image:
+        "Mở ảnh bằng path được load qua transform"
+        image_path = self.paths[index]
+        return Image.open(image_path)
+    
+    def __len__(self) -> int:
+        "Trả về độ dài của total sample"
+        return len(self.paths)
+    
+    def __getitem__(self, index: int) -> Tuple[torch.Tensor: int]:
+        "Return 1 sample of data and label (X,y)"
+        img = self.load_image(index)
+        class_name = self.paths[index].parent.name 
+        class_idx = self.class_to_idx[class_name]
+
+        #Transform if necesssary
+
+        if self.transform:
+            return self.transform(img), class_idx # return data, label (x,y)
+        else:
+            return img,class_idx # return un transform image and label
+        
+
