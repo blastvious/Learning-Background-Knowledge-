@@ -62,4 +62,18 @@ dkms.conf
 *.pt
 # fashion data from internet
 *.ubyte
-*.ubyte.gz
+*.ubyte.gzpytorch-deep-learning/Cloning/data/FashionMNIST/
+# Datasets
+Mini_project/ML_Project/data/
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+tf/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local files
+vocabulary.txt
